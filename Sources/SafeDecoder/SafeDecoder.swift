@@ -42,10 +42,12 @@ public struct SafeDecoder {
         self.decoder = decoder
     }
     
+    /// Decode
     public func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable {
         try decoder.decode(DefaultContainer<T>.self, from: data).base
     }
     
+    /// support configurable decode
     public func decode<T, C>(_ type: T.Type, _ c: C.Type, from data: Data) throws -> T where T : Decodable, C : SafeConfigurationType {
         try decoder.decode(Container<T, C>.self, from: data).base
     }
